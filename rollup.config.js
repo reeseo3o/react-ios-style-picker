@@ -20,6 +20,7 @@ export default [
         file: "./dist/bundle.js",
         format: "cjs",
         sourcemap: true,
+        exports: "auto",
       },
     ],
     plugins: [
