@@ -1,0 +1,33 @@
+.list {
+  position: relative;
+  height: 200px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.list-center {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.1);
+  transform: translateY(-50%);
+}
+
+.list-item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.list-item.selected {
+  background-color: rgba(0, 0, 0, 0.2);
+}
