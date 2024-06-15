@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "ESNext",
+    "lib": ["DOM", "ESNext"],
+    "jsx": "react-jsx",
+    "outDir": "dist/dts",
+    "declaration": true,
+    "sourceMap": true,
+    "strict": true,
+    "rootDir": "src",
+    "emitDeclarationOnly": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
