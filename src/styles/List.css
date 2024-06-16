@@ -1,0 +1,19 @@
+.list {
+  position: relative;
+  margin: 0;
+  height: 9rem;
+  width: 100%;
+  list-style: none;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 0;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.list {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

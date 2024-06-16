@@ -1,0 +1,65 @@
+{
+  "name": "react-ios-style-picker",
+  "version": "0.0.3",
+  "keywords": [
+    "react",
+    "react-component",
+    "picker",
+    "ios",
+    "style",
+    "react-ios-style-picker"
+  ],
+  "main": "./dist/bundle.js",
+  "module": "./dist/esm/bundle.js",
+  "exports": {
+    ".": {
+      "require": "./dist/bundle.js",
+      "import": "./dist/esm/bundle.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reeseo3o/react-ios-style-picker.git"
+  },
+  "author": "reeseo3o",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -cw"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "@rollup/plugin-alias": "^5.1.0",
+    "@rollup/plugin-babel": "^5.2.2",
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^20.14.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.0.2",
+    "babel-eslint": "^10.1.0",
+    "postcss": "^8.1.4",
+    "postcss-import": "^16.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^2.32.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.0",
+    "rollup-plugin-prettier": "^4.1.1",
+    "rollup-preserve-directives": "^1.1.1",
+    "tslib": "^2.6.3",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {}
+}
