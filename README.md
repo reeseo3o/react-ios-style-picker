@@ -16,11 +16,11 @@ Whether you're building a mobile-first design or adding mobile-friendly elements
 - **Flexible Functionality**: Supports a variety of use cases from simple date pickers to more complex custom selector interfaces.
 - **Accessibility Focused**: Designed with accessibility in mind, ensuring that all users can navigate and interact with the components effectively.
 
-#### Picker
+### Picker
 
 The Picker component allows users to select an item from a scrollable list. It is customizable with styles and callback functions.
 
-##### Props
+#### Props
 
 - list ((string | number)[]): Array of items to display in the picker.
 - itemHeight (number): Height of each item in the picker. Default is 50.
@@ -52,7 +52,7 @@ function App() {
 
 The BottomSheet component is used to display content in a sliding panel from the bottom. It is ideal for modal views.
 
-##### Props
+#### Props
 
 - children (React.ReactNode | React.ReactNode[]): The content to display inside the BottomSheet.
 - isOpen (boolean): Whether the BottomSheet is visible.
