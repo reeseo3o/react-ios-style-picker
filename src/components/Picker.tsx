@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import List from "./List";
 import ListItem from "./ListItem";
 import ListCenter from "./ListCenter";
@@ -9,9 +8,8 @@ interface ScrollPickerProps {
   itemHeight?: number;
   initialSelected?: string | number;
   onSelectedChange?: (selected: string | number) => void;
-  className?: string;
   itemClassName?: string;
-  itemStyle?: CSSProperties;
+  itemStyle?: { [key: string]: string };
 }
 
 const Picker: React.FC<ScrollPickerProps> = ({
@@ -19,7 +17,6 @@ const Picker: React.FC<ScrollPickerProps> = ({
   itemHeight = 50,
   initialSelected,
   onSelectedChange,
-  className,
   itemClassName,
   itemStyle,
 }: ScrollPickerProps) => {
@@ -31,12 +28,7 @@ const Picker: React.FC<ScrollPickerProps> = ({
   });
 
   return (
-    <List
-      ref={scrollRef}
-      onScroll={handleScroll}
-      className={className}
-      itemStyle={itemStyle}
-    >
+    <List ref={scrollRef} onScroll={handleScroll} itemStyle={itemStyle}>
       <ListCenter />
       {list.map((item, index) => (
         <ListItem

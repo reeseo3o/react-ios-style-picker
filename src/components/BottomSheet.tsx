@@ -20,8 +20,9 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className={`bottom-sheet-overlay ${className}`} style={style}>
+    <div className={`bottom-sheet-overlay ${className}`} onClick={onClose}>
       <div
+        style={style}
         className="bottom-sheet-content"
         onClick={(e) => e.stopPropagation()}
       >

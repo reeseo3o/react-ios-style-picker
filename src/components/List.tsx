@@ -1,16 +1,18 @@
 import { forwardRef } from "react";
+import { CSSProperties } from "react";
 import "../styles/List.css";
 
 interface ListProps {
   children: React.ReactNode;
   onScroll: () => void;
-  className?: string;
+  itemStyle?: CSSProperties;
+  itemClassName?: string;
 }
 
 const List = forwardRef<HTMLUListElement, ListProps>(
-  ({ children, onScroll, className }, ref) => {
+  ({ children, onScroll, itemStyle }, ref) => {
     return (
-      <ul ref={ref} onScroll={onScroll} className={`list ${className}`}>
+      <ul ref={ref} onScroll={onScroll} className="list" style={itemStyle}>
         {children}
       </ul>
     );
