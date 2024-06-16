@@ -9,6 +9,8 @@ The library includes two main components:
 
 Whether you're building a mobile-first design or adding mobile-friendly elements to a responsive web application, `react-ios-style-picker` provides the tools you need to incorporate sleek, intuitive selection interfaces.
 
+<img src="image.png" alt="Example of Picker and BottomSheet components" width="300">
+
 ### Key Features:
 
 - **iOS-like Interface**: Provides a user experience similar to the native iOS picker, making it ideal for creating consistent and familiar interfaces across web and mobile platforms.
