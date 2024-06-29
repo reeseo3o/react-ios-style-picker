@@ -1,50 +1,74 @@
-import { useRef, useState, useCallback, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useLayoutEffect,
+  useEffect,
+  useCallback,
+} from "react";
 
 interface UseScrollSelectionProps {
-  list: (string | number)[];
-  itemHeight: number;
-  initialSelected?: string | number;
-  onSelectedChange?: (selected: string | number) => void;
+  list: React.ReactNode[];
+  itemHeight?: number;
+  initialSelected?: React.ReactNode;
+  onSelectedChange?: (selected: React.ReactNode) => void;
 }
 
-function useScrollSelection({
+const useScrollSelection = ({
   list,
   itemHeight,
   initialSelected,
   onSelectedChange,
-}: UseScrollSelectionProps) {
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+}: UseScrollSelectionProps) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [measuredItemHeight, setMeasuredItemHeight] = useState(
+    itemHeight || 50
+  );
   const scrollRef = useRef<HTMLUListElement>(null);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const itemRef = useRef<HTMLLIElement>(null);
+
+  useLayoutEffect(() => {
+    if (initialSelected && scrollRef.current) {
+      const index = list.findIndex((item) =>
+        React.isValidElement(item) && React.isValidElement(initialSelected)
+          ? item.key === initialSelected.key ||
+            item.props.children === initialSelected.props.children
+          : item === initialSelected
+      );
+
+      if (index !== -1) {
+        setSelectedIndex(index);
+        scrollRef.current.scrollTop = index * measuredItemHeight;
+      }
+    }
+  }, [initialSelected, measuredItemHeight, list]);
+
+  useEffect(() => {
+    if (itemRef.current && !itemHeight) {
+      setMeasuredItemHeight(itemRef.current.clientHeight);
+    }
+  }, [itemHeight]);
 
   const handleScroll = useCallback(() => {
     if (scrollRef.current) {
-      clearTimeout(timerRef.current!);
-      timerRef.current = setTimeout(() => {
-        const newSelectedIndex = Math.floor(
-          (scrollRef.current!.scrollTop + itemHeight / 2) / itemHeight
-        );
-        if (
-          selectedIndex !== newSelectedIndex &&
-          list[newSelectedIndex] !== ""
-        ) {
-          setSelectedIndex(newSelectedIndex);
-          onSelectedChange?.(list[newSelectedIndex]);
-        }
-      }, 100); // 100ms 간격으로 스크롤 이벤트를 체크
-    }
-  }, [itemHeight, selectedIndex, list, onSelectedChange]);
+      const scrollTop = scrollRef.current.scrollTop;
+      const index = Math.round(scrollTop / measuredItemHeight);
+      console.log("Scroll top:", scrollTop);
+      console.log("Measured item height:", measuredItemHeight);
+      console.log("Calculated index:", index);
 
-  useEffect(() => {
-    const initialIndex =
-      initialSelected !== undefined ? list.indexOf(initialSelected) : 1;
-    setSelectedIndex(initialIndex);
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = initialIndex * itemHeight;
+      if (index >= 0 && index < list.length && index !== selectedIndex) {
+        setSelectedIndex(index);
+        onSelectedChange?.(list[index]);
+      }
     }
-  }, [initialSelected, itemHeight, list]);
+  }, [selectedIndex, measuredItemHeight, list, onSelectedChange]);
 
-  return { selectedIndex, scrollRef, handleScroll };
-}
+  return {
+    selectedIndex,
+    scrollRef,
+    handleScroll,
+    itemRef, // ref를 반환하여 각 ListItem에 적용
+  };
+};
 
 export default useScrollSelection;
