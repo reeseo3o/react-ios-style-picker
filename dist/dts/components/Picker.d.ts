@@ -1,9 +1,8 @@
 import React from "react";
-interface ScrollPickerProps {
+interface PickerProps {
     list: React.ReactNode[];
-    itemHeight?: number;
     initialSelected?: React.ReactNode;
     onSelectedChange?: (selected: React.ReactNode) => void;
 }
-declare const Picker: React.FC<ScrollPickerProps>;
+declare const Picker: React.FC<PickerProps>;
 export default Picker;

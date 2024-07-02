@@ -1,14 +1,13 @@
-import React from "react";
-interface UseScrollSelectionProps {
+/// <reference types="react" />
+type UseScrollSelectionProps = {
     list: React.ReactNode[];
-    itemHeight?: number;
-    initialSelected?: React.ReactNode;
-    onSelectedChange?: (selected: React.ReactNode) => void;
-}
-declare const useScrollSelection: ({ list, itemHeight, initialSelected, onSelectedChange, }: UseScrollSelectionProps) => {
+    initialSelected: React.ReactNode;
+    onSelectedChange: (selected: React.ReactNode) => void;
+};
+declare const useScrollSelection: ({ list, initialSelected, onSelectedChange, }: UseScrollSelectionProps) => {
     selectedIndex: number;
-    scrollRef: React.RefObject<HTMLUListElement>;
+    scrollRef: import("react").RefObject<HTMLUListElement>;
     handleScroll: () => void;
-    itemRef: React.RefObject<HTMLLIElement>;
+    itemRef: import("react").RefObject<HTMLLIElement>;
 };
 export default useScrollSelection;

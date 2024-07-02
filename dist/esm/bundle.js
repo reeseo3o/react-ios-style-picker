@@ -1,5 +1,5 @@
 import { jsx, jsxs } from 'react/jsx-runtime';
-import React, { forwardRef, useState, useRef, useLayoutEffect, useEffect, useCallback } from 'react';
+import { forwardRef, useState, useRef, useLayoutEffect, useEffect } from 'react';
 
 function styleInject(css, ref) {
   if ( ref === void 0 ) ref = {};
@@ -52,43 +52,30 @@ styleInject(css_248z$1);
 var ListCenter = function () { return jsx("div", { className: "list-center" }); };
 
 var useScrollSelection = function (_a) {
-    var list = _a.list, itemHeight = _a.itemHeight, initialSelected = _a.initialSelected, onSelectedChange = _a.onSelectedChange;
-    var _b = useState(0), selectedIndex = _b[0], setSelectedIndex = _b[1];
-    var _c = useState(itemHeight || 50), measuredItemHeight = _c[0], setMeasuredItemHeight = _c[1];
+    var list = _a.list, initialSelected = _a.initialSelected, onSelectedChange = _a.onSelectedChange;
+    var _b = useState(function () {
+        return list.indexOf(initialSelected);
+    }), selectedIndex = _b[0], setSelectedIndex = _b[1];
+    var _c = useState(50), itemHeight = _c[0], setItemHeight = _c[1];
     var scrollRef = useRef(null);
     var itemRef = useRef(null);
     useLayoutEffect(function () {
-        if (initialSelected && scrollRef.current) {
-            var index = list.findIndex(function (item) {
-                return React.isValidElement(item) && React.isValidElement(initialSelected)
-                    ? item.key === initialSelected.key ||
-                        item.props.children === initialSelected.props.children
-                    : item === initialSelected;
-            });
-            if (index !== -1) {
-                setSelectedIndex(index);
-                scrollRef.current.scrollTop = index * measuredItemHeight;
-            }
+        if (itemRef.current) {
+            setItemHeight(itemRef.current.clientHeight);
         }
-    }, [initialSelected, measuredItemHeight, list]);
+    }, []);
     useEffect(function () {
-        if (itemRef.current && !itemHeight) {
-            setMeasuredItemHeight(itemRef.current.clientHeight);
-        }
-    }, [itemHeight]);
-    var handleScroll = useCallback(function () {
         if (scrollRef.current) {
-            var scrollTop = scrollRef.current.scrollTop;
-            var index = Math.round(scrollTop / measuredItemHeight);
-            console.log("Scroll top:", scrollTop);
-            console.log("Measured item height:", measuredItemHeight);
-            console.log("Calculated index:", index);
-            if (index >= 0 && index < list.length && index !== selectedIndex) {
-                setSelectedIndex(index);
-                onSelectedChange === null || onSelectedChange === void 0 ? void 0 : onSelectedChange(list[index]);
-            }
+            scrollRef.current.scrollTop = selectedIndex * itemHeight;
         }
-    }, [selectedIndex, measuredItemHeight, list, onSelectedChange]);
+    }, [selectedIndex, itemHeight]);
+    var handleScroll = function () {
+        if (scrollRef.current) {
+            var index = Math.floor(scrollRef.current.scrollTop / itemHeight);
+            setSelectedIndex(index);
+            onSelectedChange(list[index]);
+        }
+    };
     return {
         selectedIndex: selectedIndex,
         scrollRef: scrollRef,
@@ -98,13 +85,12 @@ var useScrollSelection = function (_a) {
 };
 
 var Picker = function (_a) {
-    var list = _a.list, itemHeight = _a.itemHeight, initialSelected = _a.initialSelected, onSelectedChange = _a.onSelectedChange;
-    var _b = useScrollSelection({
+    var list = _a.list, initialSelected = _a.initialSelected, _b = _a.onSelectedChange, onSelectedChange = _b === void 0 ? function () { } : _b;
+    var _c = useScrollSelection({
         list: list,
-        itemHeight: itemHeight,
         initialSelected: initialSelected,
         onSelectedChange: onSelectedChange,
-    }), selectedIndex = _b.selectedIndex, scrollRef = _b.scrollRef, handleScroll = _b.handleScroll, itemRef = _b.itemRef;
+    }), selectedIndex = _c.selectedIndex, scrollRef = _c.scrollRef, handleScroll = _c.handleScroll, itemRef = _c.itemRef;
     return (jsxs(List, { ref: scrollRef, onScroll: handleScroll, children: [jsx(ListCenter, {}), list.map(function (item, index) { return (jsx(ListItem, { ref: index === 0 ? itemRef : null, isSelected: index === selectedIndex, children: item }, index)); })] }));
 };
 

@@ -3,22 +3,20 @@ import List from "./List";
 import ListItem from "./ListItem";
 import ListCenter from "./ListCenter";
 import useScrollSelection from "../hooks/useScrollSelection";
-interface ScrollPickerProps {
+interface PickerProps {
   list: React.ReactNode[];
-  itemHeight?: number;
   initialSelected?: React.ReactNode;
   onSelectedChange?: (selected: React.ReactNode) => void;
 }
-const Picker: React.FC<ScrollPickerProps> = ({
+
+const Picker: React.FC<PickerProps> = ({
   list,
-  itemHeight,
   initialSelected,
-  onSelectedChange,
-}: ScrollPickerProps) => {
+  onSelectedChange = () => {},
+}) => {
   const { selectedIndex, scrollRef, handleScroll, itemRef } =
     useScrollSelection({
       list,
-      itemHeight,
       initialSelected,
       onSelectedChange,
     });
@@ -29,7 +27,7 @@ const Picker: React.FC<ScrollPickerProps> = ({
       {list.map((item, index) => (
         <ListItem
           key={index}
-          ref={index === 0 ? itemRef : null} // 첫 번째 아이템의 높이를 측정
+          ref={index === 0 ? itemRef : null}
           isSelected={index === selectedIndex}
         >
           {item}

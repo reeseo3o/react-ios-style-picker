@@ -1,13 +1,12 @@
 /// <reference types="react" />
 import React$1 from 'react';
 
-interface ScrollPickerProps {
+interface PickerProps {
     list: React$1.ReactNode[];
-    itemHeight?: number;
     initialSelected?: React$1.ReactNode;
     onSelectedChange?: (selected: React$1.ReactNode) => void;
 }
-declare const Picker: React$1.FC<ScrollPickerProps>;
+declare const Picker: React$1.FC<PickerProps>;
 
 interface BottomSheetProps {
     children: React.ReactNode | React.ReactNode[];
