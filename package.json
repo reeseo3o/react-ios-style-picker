@@ -1,6 +1,7 @@
 {
   "name": "react-ios-style-picker",
   "version": "0.0.3",
+  "description": "A highly customizable iOS-style picker and bottom sheet component library for React",
   "keywords": [
     "react",
     "react-component",
@@ -11,6 +12,7 @@
   ],
   "main": "./dist/bundle.js",
   "module": "./dist/esm/bundle.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/bundle.js",
@@ -18,48 +20,88 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "files": [
+    "dist/bundle.js",
+    "dist/bundle.js.map",
+    "dist/esm/bundle.js",
+    "dist/esm/bundle.js.map",
+    "dist/index.d.ts",
+    "dist/dts/components",
+    "dist/dts/hooks/useScrollSelection.d.ts",
+    "dist/dts/index.d.ts",
+    "dist/esm/dts/components",
+    "dist/esm/dts/hooks/useScrollSelection.d.ts",
+    "dist/esm/dts/index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/reeseo3o/react-ios-style-picker.git"
   },
+  "homepage": "https://github.com/reeseo3o/react-ios-style-picker#readme",
+  "bugs": {
+    "url": "https://github.com/reeseo3o/react-ios-style-picker/issues"
+  },
   "author": "reeseo3o",
   "scripts": {
-    "build": "rollup -c",
-    "watch": "rollup -cw"
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "rollup -c",
+    "build": "npm run build:types && npm run build:js",
+    "watch": "rollup -cw",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "prepublishOnly": "npm run build && npm test"
   },
   "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
-    "@babel/preset-env": "^7.12.1",
-    "@babel/preset-react": "^7.12.1",
-    "@babel/preset-typescript": "^7.12.1",
-    "@rollup/plugin-alias": "^5.1.0",
-    "@rollup/plugin-babel": "^5.2.2",
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/node": "^20.14.2",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.0.2",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@rollup/plugin-alias": "^5.1.1",
+    "@rollup/plugin-babel": "^6.1.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-typescript": "^12.3.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.19.27",
+    "@types/react": "^18.3.27",
+    "@types/react-dom": "^18.3.7",
+    "autoprefixer": "^10.4.23",
     "babel-eslint": "^10.1.0",
-    "postcss": "^8.1.4",
-    "postcss-import": "^16.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "rollup": "^2.32.0",
-    "rollup-plugin-dts": "^6.1.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "postcss": "^8.5.6",
+    "postcss-import": "^16.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rollup": "^4.54.0",
+    "rollup-plugin-dts": "^6.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",
-    "rollup-plugin-prettier": "^4.1.1",
-    "rollup-preserve-directives": "^1.1.1",
-    "tslib": "^2.6.3",
-    "typescript": "^5.4.5"
-  },
-  "dependencies": {}
+    "rollup-plugin-prettier": "^4.1.2",
+    "rollup-preserve-directives": "^1.1.3",
+    "ts-jest": "^29.4.6",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.3"
+  }
 }
