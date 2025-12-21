@@ -1,48 +1,55 @@
+/* iOS 시스템 색상 정의 */
 .list-item {
-  --picker-item-color: rgba(0, 0, 0, 1);
+  --picker-item-color: rgba(0, 0, 0, 0.85);
   --picker-item-selected-color: rgba(0, 0, 0, 1);
-  --picker-item-selected-weight: 500;
-  --picker-item-border-color: rgba(0, 0, 0, 0.15);
-  --picker-item-font-size: 1.0625rem;
+  --picker-item-font-size: 21px;
+  --picker-item-font-weight: 400;
+  --picker-item-selected-weight: 400;
 }
 
 @media (prefers-color-scheme: dark) {
   .list-item {
-    --picker-item-color: rgba(255, 255, 255, 1);
+    --picker-item-color: rgba(255, 255, 255, 0.85);
     --picker-item-selected-color: rgba(255, 255, 255, 1);
-    --picker-item-border-color: rgba(255, 255, 255, 0.1);
   }
 }
 
 .list[data-theme="dark"] .list-item {
-  --picker-item-color: rgba(255, 255, 255, 1);
+  --picker-item-color: rgba(255, 255, 255, 0.85);
   --picker-item-selected-color: rgba(255, 255, 255, 1);
-  --picker-item-border-color: rgba(255, 255, 255, 0.1);
+}
+
+.list[data-theme="light"] .list-item {
+  --picker-item-color: rgba(0, 0, 0, 0.85);
+  --picker-item-selected-color: rgba(0, 0, 0, 1);
 }
 
 .list-item {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--picker-item-color, rgba(0, 0, 0, 1));
-  font-size: var(--picker-item-font-size, 1.0625rem);
-  font-weight: 400;
-  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
-              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-              font-weight 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--picker-item-color);
+  font-size: var(--picker-item-font-size);
+  font-weight: var(--picker-item-font-weight);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   position: relative;
-  z-index: 3; 
-  border-top: 0.5px solid transparent;
-  border-bottom: 0.5px solid transparent;
+  z-index: 2;
+  user-select: none;
+  -webkit-user-select: none;
+  background: none;
+  background-color: transparent;
 }
 
 .list-item.selected {
-  align-items: center;
-  justify-content: center;
-  color: var(--picker-item-selected-color, rgba(0, 0, 0, 1));
-  font-weight: var(--picker-item-selected-weight, 500);
-  opacity: 1 !important;
-  z-index: 4;
-  border-top: 0.5px solid var(--picker-item-border-color, rgba(0, 0, 0, 0.15));
-  border-bottom: 0.5px solid var(--picker-item-border-color, rgba(0, 0, 0, 0.15));
+  --picker-item-selected-bg: transparent;
+  color: var(--picker-item-selected-color);
+  font-weight: var(--picker-item-selected-weight);
+  opacity: 1;
+  background: var(--picker-item-selected-bg);
+  background-color: var(--picker-item-selected-bg);
+  border-radius: 0;
+  margin: 0;
 }

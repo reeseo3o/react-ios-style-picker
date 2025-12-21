@@ -18,7 +18,6 @@
   }
 }
 
-/* 명시적 다크 모드 클래스 */
 .bottom-sheet-overlay[data-theme="dark"] {
   --bottom-sheet-overlay-bg: rgba(0, 0, 0, 0.6);
   --bottom-sheet-content-bg: #1c1c1e;
@@ -73,9 +72,6 @@
     transform: translateY(0);
     opacity: 1;
   }
-}
-
-.bottom-sheet {
 }
 
 .bottom-sheet-button {
