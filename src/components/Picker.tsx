@@ -119,7 +119,8 @@ const Picker: React.FC<ScrollPickerProps> = ({
   const themeAttr = theme !== "auto" ? { "data-theme": theme } : {};
 
   return (
-    <div className={className} style={style}>
+    <div className={className} style={{ ...style, position: 'relative', height: `${listHeight}px`, minHeight: `${listHeight}px`, flexShrink: 0 }}>
+      {showCenterIndicator && <ListCenter itemHeight={itemHeight} />}
       <List 
         ref={scrollRef} 
         onScroll={handleScrollWithPosition} 
@@ -136,7 +137,6 @@ const Picker: React.FC<ScrollPickerProps> = ({
         aria-activedescendant={`picker-option-${selectedIndex}`}
         {...themeAttr}
       >
-        {showCenterIndicator && <ListCenter itemHeight={itemHeight} />}
         {list.map((item, index) => {
           const opacity = getItemOpacity(index);
           return (

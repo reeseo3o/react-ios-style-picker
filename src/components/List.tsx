@@ -1,21 +1,19 @@
-import { forwardRef } from "react";
+import { forwardRef, HTMLAttributes } from "react";
 import { CSSProperties } from "react";
 import "../styles/List.css";
 
-interface ListProps {
+interface ListProps extends Omit<HTMLAttributes<HTMLUListElement>, 'onScroll'> {
   children: React.ReactNode;
   onScroll: () => void;
   itemStyle?: CSSProperties;
+  itemClassName?: string;
   className?: string;
   showGradientMask?: boolean;
   "data-theme"?: "light" | "dark";
-  role?: string;
-  "aria-label"?: string;
-  "aria-activedescendant"?: string;
 }
 
 const List = forwardRef<HTMLUListElement, ListProps>(
-  ({ children, onScroll, itemStyle, className, showGradientMask = true, "data-theme": dataTheme, role, "aria-label": ariaLabel, "aria-activedescendant": ariaActiveDescendant }, ref) => {
+  ({ children, onScroll, itemStyle, className, showGradientMask = true, "data-theme": dataTheme, ...rest }, ref) => {
     return (
       <ul 
         ref={ref} 
@@ -24,9 +22,7 @@ const List = forwardRef<HTMLUListElement, ListProps>(
         style={itemStyle}
         data-gradient-mask={showGradientMask}
         data-theme={dataTheme}
-        role={role}
-        aria-label={ariaLabel}
-        aria-activedescendant={ariaActiveDescendant}
+        {...rest}
       >
         {children}
       </ul>
