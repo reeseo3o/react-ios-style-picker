@@ -28,8 +28,11 @@ export default [
       nodeResolve(),
       typescript({
         tsconfig: "./tsconfig.json",
-        declaration: true,
-        declarationDir: "dist/dts",
+        compilerOptions: {
+          outDir: null,
+          declarationDir: null,
+          declaration: false,
+        },
       }),
       postcss({
         plugins: [cssimport(), autoprefixer()],
