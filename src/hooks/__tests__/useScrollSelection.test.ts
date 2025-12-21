@@ -1,6 +1,18 @@
 import { renderHook, act } from '@testing-library/react';
 import useScrollSelection from '../useScrollSelection';
 
+const createMockScrollRef = (scrollTop = 0, clientHeight = 150) => {
+  const ref = {
+    current: {
+      scrollTop,
+      clientHeight,
+      style: { paddingTop: '50px', paddingBottom: '50px' },
+      scrollTo: jest.fn(),
+    } as any,
+  };
+  return ref;
+};
+
 describe('useScrollSelection Hook', () => {
   const mockList = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'];
   const itemHeight = 50;
