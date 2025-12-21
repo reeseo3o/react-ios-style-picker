@@ -32,7 +32,9 @@ jobs:
     - name: Configure npm for publishing
       run: |
         echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-        npm whoami
+        npm config set //registry.npmjs.org/:_authToken ${{ secrets.NPM_TOKEN }}
+        echo "NPM user: $(npm whoami --registry=https://registry.npmjs.org)"
+        echo "Package name: react-ios-style-picker"
     
     - name: Publish to NPM
       run: npm publish --access public
