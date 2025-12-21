@@ -1,5 +1,14 @@
 import "../styles/ListCenter.css";
 
-const ListCenter = () => <div className="list-center"></div>;
+interface ListCenterProps {
+  itemHeight?: number;
+}
+
+const ListCenter: React.FC<ListCenterProps> = ({ itemHeight = 50 }) => (
+  <div 
+    className="list-center" 
+    style={{ height: `${itemHeight}px` }}
+  />
+);
 
 export default ListCenter;
