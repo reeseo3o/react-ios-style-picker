@@ -1,12 +1,14 @@
 .list {
   position: relative;
   margin: 0;
-  height: 9rem;
   width: 100%;
   list-style: none;
   overflow: hidden;
   overflow-y: scroll;
   padding: 0;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto; /* JavaScript로 제어하므로 auto로 설정 */
+  overscroll-behavior: contain; /* 부모 스크롤과 분리 */
 }
 
 .list::-webkit-scrollbar {
@@ -16,4 +18,71 @@
 .list {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* CSS 변수로 커스터마이징 가능 - 라이트 모드 기본값 */
+.list {
+  --picker-bg-color: #ffffff;
+  --picker-gradient-start: rgba(255, 255, 255, 1);
+  --picker-gradient-mid: rgba(255, 255, 255, 0.95);
+  --picker-gradient-end: rgba(255, 255, 255, 0);
+  --picker-center-exclude: 25px;
+}
+
+/* iOS 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .list {
+    --picker-bg-color: #000000;
+    --picker-gradient-start: rgba(0, 0, 0, 1);
+    --picker-gradient-mid: rgba(0, 0, 0, 0.95);
+    --picker-gradient-end: rgba(0, 0, 0, 0);
+  }
+}
+
+/* 명시적 다크 모드 클래스 */
+.list[data-theme="dark"] {
+  --picker-bg-color: #000000;
+  --picker-gradient-start: rgba(0, 0, 0, 1);
+  --picker-gradient-mid: rgba(0, 0, 0, 0.95);
+  --picker-gradient-end: rgba(0, 0, 0, 0);
+}
+
+.list {
+  background-color: var(--picker-bg-color, #ffffff);
+}
+
+/* iOS 스타일 그라데이션 마스크 - 위쪽 페이드 */
+.list[data-gradient-mask="true"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(50% - var(--picker-center-exclude, 25px));
+  background: linear-gradient(
+    to bottom,
+    var(--picker-gradient-start, rgba(255, 255, 255, 1)) 0%,
+    var(--picker-gradient-mid, rgba(255, 255, 255, 0.95)) 30%,
+    var(--picker-gradient-end, rgba(255, 255, 255, 0)) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* iOS 스타일 그라데이션 마스크 - 아래쪽 페이드 */
+.list[data-gradient-mask="true"]::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(50% - var(--picker-center-exclude, 25px));
+  background: linear-gradient(
+    to top,
+    var(--picker-gradient-start, rgba(255, 255, 255, 1)) 0%,
+    var(--picker-gradient-mid, rgba(255, 255, 255, 0.95)) 30%,
+    var(--picker-gradient-end, rgba(255, 255, 255, 0)) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
 }

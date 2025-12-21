@@ -1,5 +1,29 @@
+/* CSS 변수로 커스터마이징 가능 - 라이트 모드 기본값 */
 .list-center {
-  position: sticky;
-  top: 3rem;
-  height: 3rem;
+  --picker-center-border-color: rgba(0, 0, 0, 0.2);
+}
+
+.list-center {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+  background: transparent;
+  border-top: 0.5px solid var(--picker-center-border-color, rgba(0, 0, 0, 0.2));
+  border-bottom: 0.5px solid var(--picker-center-border-color, rgba(0, 0, 0, 0.2));
+}
+
+/* iOS 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .list-center {
+    --picker-center-border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* 명시적 다크 모드 클래스 */
+.list[data-theme="dark"] .list-center {
+  --picker-center-border-color: rgba(255, 255, 255, 0.1);
 }

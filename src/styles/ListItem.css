@@ -1,18 +1,48 @@
 .list-item {
+  --picker-item-color: rgba(0, 0, 0, 1);
+  --picker-item-selected-color: rgba(0, 0, 0, 1);
+  --picker-item-selected-weight: 500;
+  --picker-item-border-color: rgba(0, 0, 0, 0.15);
+  --picker-item-font-size: 1.0625rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .list-item {
+    --picker-item-color: rgba(255, 255, 255, 1);
+    --picker-item-selected-color: rgba(255, 255, 255, 1);
+    --picker-item-border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.list[data-theme="dark"] .list-item {
+  --picker-item-color: rgba(255, 255, 255, 1);
+  --picker-item-selected-color: rgba(255, 255, 255, 1);
+  --picker-item-border-color: rgba(255, 255, 255, 0.1);
+}
+
+.list-item {
   display: flex;
-  height: 3rem;
   align-items: center;
   justify-content: center;
-  opacity: 0.4;
+  color: var(--picker-item-color, rgba(0, 0, 0, 1));
+  font-size: var(--picker-item-font-size, 1.0625rem);
+  font-weight: 400;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+              color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              font-weight 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 3; 
+  border-top: 0.5px solid transparent;
+  border-bottom: 0.5px solid transparent;
 }
 
 .list-item.selected {
-  height: 2.5rem;
   align-items: center;
   justify-content: center;
-  align-self: stretch;
-  border-radius: 0.5rem;
-  background-color: rgba(128, 128, 128, 0.5);
-  font-weight: 600;
-  opacity: 1;
+  color: var(--picker-item-selected-color, rgba(0, 0, 0, 1));
+  font-weight: var(--picker-item-selected-weight, 500);
+  opacity: 1 !important;
+  z-index: 4;
+  border-top: 0.5px solid var(--picker-item-border-color, rgba(0, 0, 0, 0.15));
+  border-bottom: 0.5px solid var(--picker-item-border-color, rgba(0, 0, 0, 0.15));
 }
